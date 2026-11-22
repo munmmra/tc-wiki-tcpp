@@ -1,0 +1,77 @@
+---
+title: creature_loot_template
+description: 
+published: true
+date: 2025-12-10T17:16:35.417Z
+tags: database, world, 3.3.5, 3.3.5a, 335, 335a, wotlk
+editor: markdown
+dateCreated: 2021-08-30T22:03:28.901Z
+---
+
+Contains items dropped by slain creatures.
+
+[Please refer to the generic description of the loot system for more information.](/database/335/world/loot_template)
+
+## Structure
+
+| Field | Type | Attributes | Key | Null | Default | Extra | Comment |
+| --- | --- | --- | :---: | :---: | --- | --- | --- |
+| [Entry](#entry) | int | unsigned | PRI | NO | 0 |  |  |
+| [Item](#item) | int | unsigned | PRI | NO | 0 |  |  |
+| [Reference](#reference) | int | unsigned |  | NO | 0 |  |  |
+| [Chance](#chance) | float |  |  | NO | 100 |  |  |
+| [QuestRequired](#questrequired) | tinyint(1) | signed |  | NO | 0 |  |  |
+| [LootMode](#lootmode) | smallint | unsigned |  | NO | 1 |  |  |
+| [GroupId](#groupid) | tinyint | unsigned |  | NO | 0 |  |  |
+| [MinCount](#mincount) | tinyint | unsigned |  | NO | 1 |  |  |
+| [MaxCount](#maxcount) | tinyint | unsigned |  | NO | 1 |  |  |
+| [Comment](#comment) | varchar(255) |  |  | YES | NULL |  |  |
+
+&nbsp;
+## Description of fields
+
+### Entry
+creature_template entry
+&nbsp;
+
+### Item
+*- no description -*
+&nbsp;
+
+### Reference
+reference_loot_template entry
+&nbsp;
+
+### Chance
+ * **Reference** = 0: real chance = creature_loot_template.Chance
+ * **Reference** > 0: real chance = creature_loot_template.Chance * reference_loot_template.Chance
+&nbsp;
+
+### QuestRequired
+*- no description -*
+&nbsp;
+
+### LootMode
+
+<!--@include: @/partial/335/loot-modes.md-->
+
+&nbsp;
+
+### GroupId
+groupid < 128(1 << 7)
+if groupid >= 128, trigger bug then all creature will not loot anything.
+
+if Reference > 0, then creature_loot_template.GroupId must equal reference_loot_template.GroupId, if not then will not loot anything.
+&nbsp;
+
+### MinCount
+*- no description -*
+&nbsp;
+
+### MaxCount
+*- no description -*
+&nbsp;
+
+### Comment
+*- no description -*
+&nbsp;

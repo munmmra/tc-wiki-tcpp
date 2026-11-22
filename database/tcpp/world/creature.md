@@ -1,0 +1,183 @@
+---
+title: creature
+description: 
+published: true
+date: 2024-11-17T19:00:27.845Z
+tags: database, world, 3.3.5, 3.3.5a, 335, 335a, wotlk
+editor: markdown
+dateCreated: 2021-08-30T22:03:13.159Z
+---
+
+Contains individual creature spawn data. Spawn of a creature is an instance of the creature object in the world.
+
+## Structure
+
+| Field | Type | Attributes | Key | Null | Default | Extra | Comment |
+| --- | --- | --- | :---: | :---: | --- | --- | --- |
+| [guid](#guid) | int | unsigned | PRI | NO |  | auto_increment | Global Unique Identifier |
+| [id](#id-alt) | int | unsigned | MUL | NO | 0 |  | Creature Identifier |
+| [map](#map) | smallint | unsigned | MUL | NO | 0 |  | Map Identifier |
+| [zoneId](#zoneid) | smallint | unsigned |  | NO | 0 |  | Zone Identifier |
+| [areaId](#areaid) | smallint | unsigned |  | NO | 0 |  | Area Identifier |
+| [spawnMask](#spawnmask) | tinyint | unsigned |  | NO | 1 |  |  |
+| [phaseMask](#phasemask) | int | unsigned |  | NO | 1 |  |  |
+| [modelid](#modelid) | int | unsigned |  | NO | 0 |  |  |
+| [equipment_id](#equipment_id) | tinyint | signed |  | NO | 0 |  |  |
+| [position_x](#position_x) | float |  |  | NO | 0 |  |  |
+| [position_y](#position_y) | float |  |  | NO | 0 |  |  |
+| [position_z](#position_z) | float |  |  | NO | 0 |  |  |
+| [orientation](#orientation) | float |  |  | NO | 0 |  |  |
+| [spawntimesecs](#spawntimesecs) | int | unsigned |  | NO | 120 |  |  |
+| [wander_distance](#wander_distance) | float |  |  | NO | 0 |  |  |
+| [currentwaypoint](#currentwaypoint) | int | unsigned |  | NO | 0 |  |  |
+| [curhealth](#curhealth) | int | unsigned |  | NO | 1 |  |  |
+| [curmana](#curmana) | int | unsigned |  | NO | 0 |  |  |
+| [MovementType](#movementtype) | tinyint | unsigned |  | NO | 0 |  |  |
+| [npcflag](#npcflag) | int | unsigned |  | NO | 0 |  |  |
+| [unit_flags](#unit_flags) | int | unsigned |  | NO | 0 |  |  |
+| [dynamicflags](#dynamicflags) | int | unsigned |  | NO | 0 |  |  |
+| [ScriptName](#scriptname) | char(64) |  |  | YES | '' |  |  |
+| [StringId](#stringid) | varchar(64) |  |  | YES | NULL |  |  |
+| [VerifiedBuild](#verifiedbuild) | int | signed |  | YES | 0 |  |  |
+
+&nbsp;
+## Description of fields
+
+### guid
+A unique identifier given to each creature to distinguish one creature from another. 
+> Two creatures can NOT have same GUID.
+{.is-warning}
+
+&nbsp;
+
+### id {#id-alt}
+The [entry](../world/creature_template#entry) of the template that is used when instantiating this creature.
+&nbsp;
+
+### map
+The [Map ID](/files/DBC/335/map#id-alt) of the position of the creature.
+&nbsp;
+
+### zoneId
+calculated by the core if `Calculate.Creature.Zone.Area.Data` is enabled
+&nbsp;
+
+### areaId
+calculated by the core if `Calculate.Creature.Zone.Area.Data` is enabled
+&nbsp;
+
+### spawnMask
+Controls under which difficulties the creature is spawned.
+<!--@include: @/partial/335/spawn-mask.md-->
+
+&nbsp;
+
+### phaseMask
+This is a bitmask field that describes all the phases that a creature will appear in.
+
+SPELL_AURA_PHASE (261) determines the phase you can see. For example, if you had [this aura](https://aowow.trinitycore.info/?spell=55782), you would be able to see creatures in phase 2. If you wanted the creature to be visible in both phase 1 and phase 2, you would set the phaseMask to 3.
+
+&nbsp;
+
+### modelid
+The model ID associated with this creature. Note that two creatures that use the same template can have different models. See [creature_model_info](../world/creature_model_info#displayid) for more information on model-specific characteristics.
+
+> Note: This can be left at 0 and a random model from its assigned models in [creature_template](../world/creature_template#modelid-1-4) will be assigned by the core.
+{.is-info}
+
+&nbsp;
+
+### equipment_id
+The ID as defined within [creature_equip_template](../world/creature_equip_template) corresponding to the CreatureID.
+* **equipment_id** = -1: A random equipment set chosen for [creature_equip_template.CreatureID](../world/creature_equip_template#creatureid).
+* **equipment_id** = 0: No equipment defined.
+* **equipment_id** > 0: [creature_equip_template.ID](../world/creature_equip_template#id-alt)
+&nbsp;
+
+### position_x
+The X position of the creature.
+&nbsp;
+
+### position_y
+The Y position of the creature.
+&nbsp;
+
+### position_z
+The Z position of the creature.
+&nbsp;
+
+### orientation
+The orientation of the creature.  
+<!--@include: @/partial/orientation.md-->
+
+&nbsp;
+
+### spawntimesecs
+The respawn time of the creature in seconds.
+&nbsp;
+
+### wander_distance
+The maximum distance that the creature should spawn from its spawn point. Also controls how far away the creature can walk from its spawn point if its [MovementType](#movementtype) = 1.
+&nbsp;
+
+### currentwaypoint
+The current waypoint number that the creature is on, if any. (see [waypoint_data.point](../world/waypoint_data#point))
+&nbsp;
+
+### curhealth
+The current health that the creature has.
+This column is used only if [RegenHealth](/database/335/world/creature_template#regenhealth) is disabled.
+&nbsp;
+
+### curmana
+The current mana that the creature has.
+&nbsp;
+
+### MovementType
+The movement type associated with this creature. Usually the same as [creature_template.MovementType](../world/creature_template#movementtype) but can be different.
+> Note: A creature.MovementType record will override a creature_template.MovementType record.
+{.is-info}
+
+&nbsp;
+
+### npcflag
+Same as [creature_template.npcflag](../world/creature_template#npcflag)
+> Note: A creature.npcflag record will override a creature_template.npcflag record.
+{.is-info}
+
+&nbsp;
+
+### unit_flags
+Same as [creature_template.unit_flags](../world/creature_template#unit_flags)
+> Note: A creature.unit_flags record will override a creature_template.unit_flags record.
+{.is-info}
+
+&nbsp;
+
+### dynamicflags
+Same as [creature_template.dynamicflags](../world/creature_template#dynamicflags)
+> Note: A creature.dynamicflags record will override a creature_template.dynamicflags record.
+{.is-info}
+
+&nbsp;
+
+### ScriptName
+The ScriptName for when scripting it in the core.
+This might also be 'SmartTrigger'. It will than use [SmartAI](../world/smart_scripts).
+&nbsp;
+
+### StringId
+*- no description -*
+&nbsp;
+
+### VerifiedBuild
+This field is used by the TrinityDB Team to determine whether a template has been verified from WDB files.
+
+If value is 0 then it has not been parsed yet.
+
+If value is above 0 then it has been parsed with WDB files from that specific [client build](/database/335/auth/realmlist#gamebuild).
+
+If value is -1 then it is just a place holder until proper data are found on WDBs.
+
+If value is -[Client Build](/database/335/auth/realmlist#gamebuild) then it was parsed with WDB files from that specific client build and manually edited later for some special necessity.
+&nbsp;

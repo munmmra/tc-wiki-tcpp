@@ -1,0 +1,107 @@
+---
+title: creature_template_addon
+description:
+published: true
+date: 2024-05-16T11:19:32.172Z
+tags: database, world, 3.3.5, 3.3.5a, 335, 335a, wotlk
+editor: markdown
+dateCreated: 2021-08-30T22:03:53.369Z
+---
+
+The [creature_addon](../world/creature_addon) and [creature_template_addon](../world/creature_template_addon)  tables define different things that are applied on creatures when they are loaded. These "different things" can be for example to have the creature be mounted, to have it emote something, to have it display an aura effect, etc. Through the use of the fields in this table, many things can be changed about the outward visual appearance of the creature. The creature_template_addon table affects all creatures with that creature template ID while the creature_addon table affects individually spawned creatures (so that two creatures using the same template can look different).
+
+> Note: A [creature_addon](../world/creature_addon) record will override a [creature_template_addon](../world/creature_template_addon) record should they overlap on the same creature.
+{.is-info}
+
+## Structure
+
+| Field | Type | Attributes | Key | Null | Default | Extra | Comment |
+| --- | --- | --- | :---: | :---: | --- | --- | --- |
+| [entry](#entry) | int | unsigned | PRI | NO | 0 |  |  |
+| [path_id](#path_id) | int | unsigned |  | NO | 0 |  |  |
+| [mount](#mount) | int | unsigned |  | NO | 0 |  |  |
+| [MountCreatureID](#mountcreatureid) | int | unsigned |  | NO | 0 |  |  |
+| [StandState](#standstate) | tinyint | unsigned |  | NO | 0 |  |  |
+| [AnimTier](#animtier) | tinyint | unsigned |  | NO | 0 |  |  |
+| [VisFlags](#visflags) | tinyint | unsigned |  | NO | 0 |  |  |
+| [SheathState](#sheathstate) | tinyint | unsigned |  | NO | 1 |  |  |
+| [PvPFlags](#pvpflags) | tinyint | unsigned |  | NO | 0 |  |  |
+| [emote](#emote) | int | unsigned |  | NO | 0 |  |  |
+| [visibilityDistanceType](#visibilitydistancetype) | tinyint | unsigned |  | NO | 0 |  |  |
+| [auras](#auras) | mediumtext |  |  | YES | NULL |  |  |
+
+&nbsp;
+## Description of fields
+
+### entry
+Signifies a [creature entry](../world/creature_template#entry). All creatures matching this entry will be affected.
+&nbsp;
+
+### path_id
+If a creature has waypoint pathed movement, this field hold the [waypoint_data.id](../world/waypoint_data#id-alt) for the path the creature is to follow.
+&nbsp;
+
+### mount
+The [CreatureDisplayInfo ID](/files/DBC/335/creaturedisplayinfo#id-alt) of the mount to be used to make the creature appear mounted. The value here overrides the value for the creature's unit field UNIT_FIELD_MOUNTDISPLAYID.
+&nbsp;
+
+### MountCreatureID
+The [creature entry](../world/creature_template#entry) this creature is mounted on.
+> Note: This field is currently not in use.
+{.is-info}
+
+&nbsp;
+
+### StandState
+The value here overrides the `UnitStandStateType` for the creature's unit field UNIT_FIELD_BYTES_1
+
+<!--@include: @/partial/335/unit-bytes1.md{3,15}-->
+
+&nbsp;
+
+### AnimTier
+The value here overrides the `AnimTier` for the creature's unit field UNIT_FIELD_BYTES_1
+
+<!--@include: @/partial/335/unit-bytes1.md{29,}-->
+
+&nbsp;
+
+### VisFlags
+The value here overrides the `UnitVisFlags` for the creature's unit field UNIT_FIELD_BYTES_1
+
+<!--@include: @/partial/335/unit-bytes1.md{20,24}-->
+
+&nbsp;
+
+### SheathState
+The value here overrides the `SheathState` for the creature's unit field UNIT_FIELD_BYTES_2
+
+<!--@include: @/partial/335/unit-bytes2.md{4,9}-->
+
+&nbsp;
+
+### PvPFlags
+The value here overrides the `UnitPVPStateFlags` for the creature's unit field UNIT_FIELD_BYTES_2
+
+<!--@include: @/partial/335/unit-bytes2.md{14,24}-->
+
+&nbsp;
+
+### emote
+[Emote ID](/files/DBC/335/emotes#id-alt) that the creature should continually perform.
+&nbsp;
+
+### visibilityDistanceType
+Adjusts the distance from which the creature is visible.
+<!--@include: @/partial/335/visibility-distance.md-->
+
+&nbsp;
+
+### auras
+This field controls any auras to be applied on the creature (both in effect and visually). To apply multiple auras, you can add more aura entries, separating each entry by a space. Remember that if a spell applies multiple auras.
+
+List of useful aura entries (examples):
+* `16380` - Makes the creature invisible.
+* `18950` - Makes the creature detect other invisible units (players or creatures).
+* `16380 18950` - Both auras above
+&nbsp;

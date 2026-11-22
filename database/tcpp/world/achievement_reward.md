@@ -1,0 +1,59 @@
+---
+title: achievement_reward
+description:
+published: true
+date: 2024-05-16T11:19:31.117Z
+tags: database, world, 3.3.5, 3.3.5a, 335, 335a, wotlk
+editor: markdown
+dateCreated: 2021-08-30T22:02:38.555Z
+---
+
+This table describes the reward that you will receive when you obtain a given achievement.
+
+## Structure
+
+| Field | Type | Attributes | Key | Null | Default | Extra | Comment |
+| --- | --- | --- | :---: | :---: | --- | --- | --- |
+| [ID](#id-alt) | int | unsigned | PRI | NO | 0 |  |  |
+| [TitleA](#titlea) | int | unsigned |  | NO | 0 |  |  |
+| [TitleH](#titleh) | int | unsigned |  | NO | 0 |  |  |
+| [ItemID](#itemid) | int | unsigned |  | NO | 0 |  |  |
+| [Sender](#sender) | int | unsigned |  | NO | 0 |  |  |
+| [Subject](#subject) | varchar(255) |  |  | YES | NULL |  |  |
+| [Body](#body) | mediumtext |  |  | YES | NULL |  |  |
+| [MailTemplateID](#mailtemplateid) | int | unsigned |  | NO | 0 |  |  |
+
+&nbsp;
+## Description of fields
+
+### ID {#id-alt}
+[Achievement ID](/files/DBC/335/achievement#id-alt)
+&nbsp;
+
+### TitleA
+This is the [CharTitle ID](/files/DBC/335/chartitles#id-alt) for Alliance if the achievement rewards a title.
+&nbsp;
+
+### TitleH
+This is the [CharTitle ID](/files/DBC/335/chartitles#id-alt) for Horde from if the achievement rewards a title.
+&nbsp;
+
+### ItemID
+This is the [item](../world/item_template#entry) that you get if the achievement rewards an item. You will get this item in the mail.
+&nbsp;
+
+### Sender
+This is the [sender](../world/creature_template#entry) of the mail that you receive.
+&nbsp;
+
+### Subject
+This is the subject of the mail that you receive.
+&nbsp;
+
+### Body
+This is the text of the body of that mail that you receive.
+&nbsp;
+
+### MailTemplateID
+This is the [MailTemplate ID](/files/DBC/335/mailtemplate#id-alt) for the mail that you receive. Subject and Text must be empty. They are read from dbc file.
+&nbsp;
