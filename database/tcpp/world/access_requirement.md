@@ -15,16 +15,16 @@ This table contains the access requirements to enter an instance.
 | Field | Type | Attributes | Key | Null | Default | Extra | Comment |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | [`mapId`](#mapId) | int(10) unsigned | unsigned | PRI | NO | NULL |  |  |
-| `difficulty` | tinyint(3) unsigned | unsigned | PRI | NO | 0 |  |  |
-| `level_min` | tinyint(3) unsigned | unsigned |  | NO | 0 |  |  |
-| `level_max` | tinyint(3) unsigned | unsigned |  | NO | 0 |  |  |
-| `item` | int(10) unsigned | unsigned |  | NO | 0 |  |  |
-| `item2` | int(10) unsigned | unsigned |  | NO | 0 |  |  |
-| `quest_done_A` | int(10) unsigned | unsigned |  | NO | 0 |  |  |
-| `quest_done_H` | int(10) unsigned | unsigned |  | NO | 0 |  |  |
-| `completed_achievement` | int(10) unsigned | unsigned |  | NO | 0 |  |  |
-| `heroic_exclusive` | tinyint(1) |  |  | YES | 0 |  |  |
-| `comment` | text |  |  | YES | NULL |  |  |
+| [`difficulty`](#difficulty) | tinyint(3) unsigned | unsigned | PRI | NO | 0 |  |  |
+| [`level_min`](#level_min) | tinyint(3) unsigned | unsigned |  | NO | 0 |  |  |
+| [`level_max`](#level_max) | tinyint(3) unsigned | unsigned |  | NO | 0 |  |  |
+| [`item`](#item) | int(10) unsigned | unsigned |  | NO | 0 |  |  |
+| [`item2`](#item2) | int(10) unsigned | unsigned |  | NO | 0 |  |  |
+| [`quest_done_A`](#quest_done_A) | int(10) unsigned | unsigned |  | NO | 0 |  |  |
+| [`quest_done_H`](#quest_done_H) | int(10) unsigned | unsigned |  | NO | 0 |  |  |
+| [`completed_achievement`](#completed_achievement) | int(10) unsigned | unsigned |  | NO | 0 |  |  |
+| [`heroic_exclusive`](#heroic_exclusive) | tinyint(1) |  |  | YES | 0 |  |  |
+| [`comment`](#comment) | text |  |  | YES | NULL |  |  |
 
 &nbsp;
 ## Description of fields
