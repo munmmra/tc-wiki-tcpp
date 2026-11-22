@@ -13,12 +13,12 @@ This table contains the data that a player needs to obtain / complete in order t
 ## Structure
 
 | Field | Type | Attributes | Key | Null | Default | Extra | Comment |
-| --- | --- | --- | :---: | :---: | --- | --- | --- |
-| [criteria_id](#criteria_id) | int | signed | PRI | NO |  |  |  |
-| [type](#type) | tinyint | unsigned | PRI | NO | 0 |  |  |
-| [value1](#type) | int | unsigned |  | NO | 0 |  |  |
-| [value2](#type) | int | unsigned |  | NO | 0 |  |  |
-| [ScriptName](#scriptname) | char(64) |  |  | NO | '' |  |  |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| [`criteria_id`](#criteria_id)  | int(11) |  | PRI | NO | NULL |  |  |
+| [`type`](#type)  | tinyint(3) unsigned | unsigned | PRI | NO | 0 |  |  |
+| [`value1`](#value1)  | int(10) unsigned | unsigned |  | NO | 0 |  |  |
+| [`value2`](#value2)  | int(10) unsigned | unsigned |  | NO | 0 |  |  |
+| [`ScriptName`](#ScriptName)  | varchar(64) |  |  | NO | NULL |  |  |
 
 &nbsp;
 ## Description of fields
@@ -30,218 +30,234 @@ This is the [AchievementCriteria ID](/files/DBC/335/achievement_criteria#id-alt)
 ### type
 Depending on this value, it will determine how **value1** and **value2** are used.
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_NONE (0)
-* **value1**:  
-  `0`
-* **value2**:  
-  `0`
-:::
+Depending on this value, it will determine how value1 and value2 are used.
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_NONE (0)</summary>
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_T_CREATURE (1)
-* **value1**:  
-  [creature_template.entry](../world/creature_template#entry)
-* **value2**:  
-  `0`
-:::
+|value1|value2|
+| :-- | :-- |
+| 0 | 0 |
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_T_PLAYER_CLASS_RACE (2)
-* **value1**:  
-  [ChrClass ID](/files/DBC/335/chrclasses#id-alt)
-* **value2**:  
-  [ChrRace ID](/files/DBC/335/chrraces#id-alt)
-:::
+</details>
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_T_CREATURE (1)</summary>
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_T_PLAYER_LESS_HEALTH (3)
-* **value1**:  
-  The percentage of health that the target must reach
-* **value2**:  
-  `0`
-:::
+|value1|value2|
+| :-- | :-- |
+| [creature_template.entry](#creature_template) | 0|
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_T_PLAYER_DEAD (4)
-* **value1**:  
-  own_team (0, 1)
-* **value2**:  
-  `0`
+</details>
 
-not corpse (not released body), own_team == false if enemy team expected
-:::
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_T_PLAYER_CLASS_RACE (2)</summary>
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_S_AURA (5)
-* **value1**:  
-  The [Spell ID](/files/DBC/335/spell#id-alt) of the aura that must be on the player
-* **value2**:  
-  Effect Index of the aura
-:::
+|value1|value2|
+| :-- | :-- |
+| [ChrClass ID](https://trinitycore.info/files/DBC/335/chrclasses#id-alt) | [ChrRace ID](https://trinitycore.info/files/DBC/335/chrraces#id-alt) |
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_S_AREA (6)
-* **value1**:  
-  [AreaTable ID](/files/DBC/335/areatable#id-alt)
-* **value2**:  
-  `0`
-:::
+</details>
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_T_PLAYER_LESS_HEALTH (3)</summary>
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_T_AURA (7)
-* **value1**:  
-  The [Spell ID](/files/DBC/335/spell#id-alt) of the aura that must be on the target
-* **value2**:  
-  Effect Index of the aura
-:::
+|value1|value2|
+| :-- | :-- |
+| The percentage of health that the target must reach | 0 |
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_VALUE (8)
-* **value1**:  
-  Value to compare needed to attain achievement
-* **value2**:  
-  [`enum ComparisonType`](https://github.com/TrinityCore/TrinityCore/blob/3.3.5/src/common/Utilities/Util.h#L505-L513)
-  | ID | Form | Name | Comment |
-  | --- | :-: | --- | --- |
-  | 0 | == | COMP_TYPE_EQ | amount must be equal to **value1** |
-  | 1 | > | COMP_TYPE_HIGH | amount must be higher than **value1** |
-  | 2 | < | COMP_TYPE_LOW | amount must be lower than **value1** |
-  | 3 | >= | COMP_TYPE_HIGH_EQ | amount must be higher or equal to **value1** |
-  | 4 | <= | COMP_TYPE_LOW_EQ | amount must be lower or equal to **value1** |
-:::
+</details>
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_T_PLAYER_DEAD (4) </summary>
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_T_LEVEL (9)
-* **value1**:  
-  The minimum level of the target.
-* **value2**:  
-  `0`
-:::
+|value1|value2|
+| :-- | :-- |
+| own_team (0, 1) | 0 |
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_T_GENDER (10)
-* **value1**:  
-  <!--@include: @/partial/335/gender.md-->
+</details>
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_S_AURA (5) </summary>
 
-* **value2**:  
-  `0`
-:::
+|value1|value2|
+| :-- | :-- |
+| The [Spell ID](https://trinitycore.info/files/DBC/335/spell#id-alt) | Effect Index of the aura |
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_SCRIPT (11)
-* **value1**:  
-  `0`
-* **value2**:  
-  `0`
+</details>
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_S_AREA (6) </summary>
 
-[ScriptName](#scriptname) required
-:::
+|value1|value2|
+| :-- | :-- |
+| [AreaTable ID](https://trinitycore.info/files/DBC/335/areatable#id-alt) | 0 |
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_MAP_DIFFICULTY (12)
-* **value1**:  
-  <!--@include: @/partial/335/difficulty.md-->
+</details>
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_T_AURA (7) </summary>
 
-* **value2**:  
-  `0`
-:::
+|value1|value2|
+| :-- | :-- |
+| The [Spell ID](https://trinitycore.info/files/DBC/335/spell#id-alt) of the aura that must be on the target | Effect Index of the aura |
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_MAP_PLAYER_COUNT (13)
-* **value1**:  
-  count
-* **value2**:  
-  `0`
+</details>
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_VALUE (8) </summary>
+
+|value1|value2|
+| :-- | :-- |
+| Value to compare needed to attain achievement | [enum ComparisonType](https://github.com/TrinityCore/TrinityCore/blob/3.3.5/src/common/Utilities/Util.h#L505-L513) |
+
+value2: options
+| ID | Form | Name | Comment|
+| :--- | :--- | :--- | :--- |
+| 0 | == | COMP_TYPE_EQ	| amount must be equal to value1 |
+| 1	| > | COMP_TYPE_HIGH | amount must be higher than value1 |
+| 2	| < | COMP_TYPE_LOW | amount must be lower than value1 |
+| 3	| >= | COMP_TYPE_HIGH_EQ | amount must be higher or equal to value1 |
+| 4	| <= | COMP_TYPE_LOW_EQ | amount must be lower or equal to value1 |
+
+</details>
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_T_LEVEL (9) </summary>
+
+|value1|value2|
+| :-- | :-- |
+| The minimum level of the target. | 0 |
+
+</details>
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_T_GENDER (10) </summary>
+
+|value1|value2|
+| :-- | :-- |
+| [enum Gender] | 0 |
+
+value1: options
+| ID | Name |
+| :-- | :-- |
+| 0 | GENDER_MALE |
+| 1 | GENDER_FEMALE |
+| 2 | GENDER_NONE |
+
+</details>
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_SCRIPT (11) </summary>
+
+|value1|value2|
+| :-- | :-- |
+| 0 | 0 |
+
+</details>
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_MAP_DIFFICULTY (12) </summary>
+
+|value1|value2|
+| :-- | :-- |
+| [enum Difficulty] | 0 |
+
+value1: options
+| Value | Name |
+| :-- | :-- |
+| 0 | RAID_DIFFICULTY_10MAN_NORMAL / DUNGEON_DIFFICULTY_NORMAL / REGULAR_DIFFICULTY |
+| 1 | RAID_DIFFICULTY_25MAN_NORMAL / DUNGEON_DIFFICULTY_HEROIC |
+| 2 | RAID_DIFFICULTY_10MAN_HEROIC |
+| 3 | RAID_DIFFICULTY_25MAN_HEROIC |
+
+</details>
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_MAP_PLAYER_COUNT (13) </summary>
+
+|value1|value2|
+| :-- | :-- |
+| count | 0 |
 
 "with less than %u people in the zone"
-:::
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_T_TEAM (14)
-* **value1**:  
-  The target must be on this team: 
-  <!--@include: @/partial/335/team.md-->
+</details>
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_T_TEAM (14) </summary>
 
-* **value2**:  
-  `0`
-:::
+|value1|value2|
+| :-- | :-- |
+| The target must be on this team: [enum Team ](https://github.com/TrinityCore/TrinityCore/blob/e490cad2b0cb538c554006a7a8842b39f7ca143e/src/server/shared/SharedDefines.h#L851-L861) (a [Faction ID](https://trinitycore.info/files/DBC/335/faction#id)) | 0 |
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_S_DRUNK (15)
-* **value1**:  
-  How drunk the player must be:  
-  <!--@include: @/partial/335/drunken-state.md-->
+value1: options
+| ID | Name |
+| :-- | :-- |
+| 67 | HORDE |
+| 469 | ALLIANCE |
 
-* **value2**:  
-  `0`
-:::
+</details>
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_S_DRUNK (15) </summary>
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_HOLIDAY (16)
-* **value1**:  
-  [Holiday ID](/files/DBC/335/holidays#id-alt). Must be an active holiday
-* **value2**:  
-  `0`
+|value1|value2|
+| :-- | :-- |
+| How drunk the player must be: [enum DrunkenState](https://github.com/TrinityCore/TrinityCore/blob/d7329e3d3a713404d8ecbd91ae5f988fd143b793/src/server/game/Entities/Player/Player.h#L334-L340) | 0 |
 
-event in holiday time
-:::
+value1: options 
+| ID | Name |
+| :-- | :-- |
+| 0 | DRUNKEN_SOBER|
+| 1	| DRUNKEN_TIPSY|
+| 2	| DRUNKEN_DRUNK|
+| 3 | DRUNKEN_SMASHED|
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_BG_LOSS_TEAM_SCORE (17)
-* **value1**:  
-  min. score
-* **value2**:  
-  max. score
+</details>
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_HOLIDAY (16) </summary>
 
-player's team win bg and opposition team have team score in range
-:::
+|value1|value2|
+| :-- | :-- |
+| [Holiday ID.](https://trinitycore.info/files/DBC/335/holidays#id-alt) Must be an active holiday | 0 |
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_INSTANCE_SCRIPT (18)
-* **value1**:  
-  `0`
-* **value2**:  
-  `0`
+</details>
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_BG_LOSS_TEAM_SCORE (17) </summary>
 
-make instance script call for check current criteria requirements fit
-:::
+|value1|value2|
+| :-- | :-- |
+| min. score | max. score |
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_S_EQUIPPED_ITEM (19)
-* **value1**:  
-  [item_template.ItemLevel](../world/item_template#itemlevel)
-* **value2**:  
-  [item_template.Quality](../world/item_template#quality)
+</details>
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_INSTANCE_SCRIPT (18) </summary>
 
-for equipped item in slot to check item level and quality
-:::
+|value1|value2|
+| :-- | :-- |
+| 0 |0 |
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_MAP_ID (20)
-* **value1**:  
-  Player must be on [Map ID](/files/DBC/335/map#id-alt)
-* **value2**:  
-  `0`
-:::
+</details>
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_S_EQUIPPED_ITEM (19) </summary>
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_S_PLAYER_CLASS_RACE (21)
-* **value1**:  
-  [ChrClass ID](/files/DBC/335/chrclasses#id-alt)
-* **value2**:  
-  [ChrRace ID](/files/DBC/335/chrraces#id-alt)
-:::
+|value1|value2|
+| :-- | :-- |
+| [item_template.ItemLevel](https://trinitycore.info/database/335/world/item_template#itemlevel) | [item_template.Quality](https://trinitycore.info/database/335/world/item_template#quality) |
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_NTH_BIRTHDAY (22)
-* **value1**:  
-  N
-* **value2**:  
-  `0`
+for equipped item in slot to check item level and quality<br>
+nota: la tabla item_template no esta en tcpp
 
-login on day of N-th Birthday
-:::
+</details>
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_MAP_ID (20) </summary>
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_S_KNOWN_TITLE (23)
-* **value1**:  
-  [CharTitle ID](/files/DBC/335/chartitles#id-alt)
-* **value2**:  
-  `0`
+|value1|value2|
+| :-- | :-- |
+| Player must be on [Map ID](https://trinitycore.info/files/DBC/335/map#id-alt) | 0 |
 
-known (pvp) title
-:::
+</details>
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_S_PLAYER_CLASS_RACE (21) </summary>
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_GAME_EVENT (24)
-* **value1**:  
-  [game_event.eventEntry](../world/game_event#evententry)
-* **value2**:  
-  `0`
-:::
+|value1|value2|
+| :-- | :-- |
+| [ChrClass ID](https://trinitycore.info/files/DBC/335/chrclasses#id-alt) | [ChrRace ID](https://trinitycore.info/files/DBC/335/chrraces#id-alt) |
 
-::: details ACHIEVEMENT_CRITERIA_DATA_TYPE_S_ITEM_QUALITY (25)
-* **value1**:  
-  [item_template.Quality](../world/item_template#quality)
-* **value2**:  
-  `0`
-:::
+</details>
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_NTH_BIRTHDAY (22) </summary>
+
+|value1|value2|
+| :-- | :-- |
+| N | 0 |
+
+</details>
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_S_KNOWN_TITLE (23) </summary>
+
+|value1|value2|
+| :-- | :-- |
+| [CharTitle ID](https://trinitycore.info/files/DBC/335/chartitles#id-alt) | 0 |
+
+</details>
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_GAME_EVENT (24) </summary>
+
+|value1|value2|
+| :-- | :-- |
+| [game_event.eventEntry](#game_event) | 0 |
+
+</details>
+<details><summary>ACHIEVEMENT_CRITERIA_DATA_TYPE_S_ITEM_QUALITY (25) </summary>
+
+|value1|value2|
+| :-- | :-- |
+| [item_template.Quality](https://trinitycore.info/database/335/world/item_template#quality) | 0 |
+
+nota: la tabla item_template no esta en tcpp
+</details>
 
 &nbsp;
 
