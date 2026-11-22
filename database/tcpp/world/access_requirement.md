@@ -47,11 +47,11 @@ The maximum level that you can be in order to enter the instance.
 &nbsp;
 
 ### item
-An [item](https://wago.tools/db2/itemsparse){target=_blank} that you must have in your inventory to enter the instance. This item can not be in the bank.
+An [item](https://wago.tools/db2/itemsparse) that you must have in your inventory to enter the instance. This item can not be in the bank.
 &nbsp;
 
 ### item2
-A second [item](https://wago.tools/db2/itemsparse){target=_blank} that you must have in your inventory. This item can not be in the bank.
+A second [item](https://wago.tools/db2/itemsparse) that you must have in your inventory. This item can not be in the bank.
 &nbsp;
 
 ### quest_done_A
