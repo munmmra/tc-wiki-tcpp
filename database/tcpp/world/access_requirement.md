@@ -30,12 +30,12 @@ This table contains the access requirements to enter an instance.
 ## Description of fields
 ### mapId
 MapID of the map which should have access requirements
-References to: [Map.db2](https://wago.tools/db2/Map){target=_blank}
+References to: [Map.db2](https://wago.tools/db2/Map)
 &nbsp;
 
 ### difficulty
 Difficulty id of the access requirement
-References to: [Difficulty.db2](https://wago.tools/db2/Difficulty){target=_blank}
+References to: [Difficulty.db2](https://wago.tools/db2/Difficulty)
 &nbsp;
 
 ### level_min
@@ -66,8 +66,8 @@ A [quest](/database/master/world/quest_template#id-alt) that you must have compl
 An [achievement](https://wago.tools/db2/achievement){target=_blank} that must be completed by the player to enter an instance.
 &nbsp;
 
-### quest_failed_text
-The text that is shown if you try and enter the instance without having completed the quest.
+### heroic_exclusive
+?
 &nbsp;
 
 ### comment
