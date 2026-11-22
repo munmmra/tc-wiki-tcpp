@@ -13,31 +13,29 @@ This table contains the access requirements to enter an instance.
 ## Structure
 
 | Field | Type | Attributes | Key | Null | Default | Extra | Comment |
-| --- | --- | --- | :---: | :---: | --- | --- | --- |
-| [mapId](#mapid) | int | unsigned | PRI | NO |  |  |  |
-| [difficulty](#difficulty) | tinyint | unsigned | PRI | NO | 0 |  |  |
-| [level_min](#level_min) | tinyint | unsigned |  | NO | 0 |  |  |
-| [level_max](#level_max) | tinyint | unsigned |  | NO | 0 |  |  |
-| [item_level](#item_level) | smallint | unsigned |  | NO | 0 |  |  |
-| [item](#item) | int | unsigned |  | NO | 0 |  |  |
-| [item2](#item2) | int | unsigned |  | NO | 0 |  |  |
-| [quest_done_A](#quest_done_a) | int | unsigned |  | NO | 0 |  |  |
-| [quest_done_H](#quest_done_h) | int | unsigned |  | NO | 0 |  |  |
-| [completed_achievement](#completed_achievement) | int | unsigned |  | NO | 0 |  |  |
-| [quest_failed_text](#quest_failed_text) | mediumtext |  |  | YES | NULL |  |  |
-| [comment](#comment) | mediumtext |  |  | YES | NULL |  |  |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| [`mapId`](#mapId) | int(10) unsigned | unsigned | PRI | NO | NULL |  |  |
+| `difficulty` | tinyint(3) unsigned | unsigned | PRI | NO | 0 |  |  |
+| `level_min` | tinyint(3) unsigned | unsigned |  | NO | 0 |  |  |
+| `level_max` | tinyint(3) unsigned | unsigned |  | NO | 0 |  |  |
+| `item` | int(10) unsigned | unsigned |  | NO | 0 |  |  |
+| `item2` | int(10) unsigned | unsigned |  | NO | 0 |  |  |
+| `quest_done_A` | int(10) unsigned | unsigned |  | NO | 0 |  |  |
+| `quest_done_H` | int(10) unsigned | unsigned |  | NO | 0 |  |  |
+| `completed_achievement` | int(10) unsigned | unsigned |  | NO | 0 |  |  |
+| `heroic_exclusive` | tinyint(1) |  |  | YES | 0 |  |  |
+| `comment` | text |  |  | YES | NULL |  |  |
 
 &nbsp;
 ## Description of fields
-
 ### mapId
-The [Map ID](/files/DBC/335/map#id-alt) of the instance.
+MapID of the map which should have access requirements
+References to: [Map.db2](https://wago.tools/db2/Map){target=_blank}
 &nbsp;
 
 ### difficulty
-
-<!--@include: @/partial/335/difficulty.md-->
-
+Difficulty id of the access requirement
+References to: [Difficulty.db2](https://wago.tools/db2/Difficulty){target=_blank}
 &nbsp;
 
 ### level_min
@@ -48,31 +46,24 @@ The minimum level that you must be in order to enter the instance.
 The maximum level that you can be in order to enter the instance.
 &nbsp;
 
-### item_level
-The minimum average item level required to enter
- * 219 for Halls of Reflection.
- * 200 for Trial of the Champion, Pit of Saron and The Forge of Souls.
- * 180 for all other WotLK Heroic Dungeons.
-&nbsp;
-
 ### item
-An [item](../world/item_template#entry) that you must have in your inventory to enter the instance. This item can not be in the bank.
+An [item](https://wago.tools/db2/itemsparse){target=_blank} that you must have in your inventory to enter the instance. This item can not be in the bank.
 &nbsp;
 
 ### item2
-A second [item](../world/item_template#entry) that you must have in your inventory. This item can not be in the bank.
+A second [item](https://wago.tools/db2/itemsparse){target=_blank} that you must have in your inventory. This item can not be in the bank.
 &nbsp;
 
 ### quest_done_A
-A [quest](../world/quest_template#id-alt) that you must have completed. This field is only for alliance.
+A [quest](/database/master/world/quest_template#id-alt) that you must have completed. This field is only for alliance.
 &nbsp;
 
 ### quest_done_H
-A [quest](../world/quest_template#id-alt) that you must have completed. This field is only for horde.
+A [quest](/database/master/world/quest_template#id-alt) that you must have completed. This field is only for horde.
 &nbsp;
 
 ### completed_achievement
-An [Achievement ID](/files/DBC/335/achievement#id-alt) that must be completed by the player to enter an instance.
+An [achievement](https://wago.tools/db2/achievement){target=_blank} that must be completed by the player to enter an instance.
 &nbsp;
 
 ### quest_failed_text
@@ -82,3 +73,5 @@ The text that is shown if you try and enter the instance without having complete
 ### comment
 This field is for any comment you want to make about the requirements. It is arbitrary text.
 &nbsp;
+
+
