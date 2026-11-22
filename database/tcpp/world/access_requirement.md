@@ -63,7 +63,7 @@ A [quest](/database/master/world/quest_template#id-alt) that you must have compl
 &nbsp;
 
 ### completed_achievement
-An [achievement](https://wago.tools/db2/achievement){target=_blank} that must be completed by the player to enter an instance.
+An [achievement](https://wago.tools/db2/achievement) that must be completed by the player to enter an instance.
 &nbsp;
 
 ### heroic_exclusive
